@@ -1,1 +1,1 @@
-npx nodemon DEBUG=harvest:* npm start
+npx nodemon DEBUG=acopio:* npm start
