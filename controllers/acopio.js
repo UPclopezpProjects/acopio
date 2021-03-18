@@ -81,31 +81,6 @@ function getData(req, res) {
   });
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 module.exports = {
 	dataTransaction,
   getData
