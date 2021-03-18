@@ -66,7 +66,7 @@ function serviceInit(req, next) {
 
 function getData(req, res) {
   var code = req.body.code;
-  console.log(code);
+  //console.log(code);
   var query = { id: code };
   Acopio.findOne(query, (err, data) => {
     if(err){
