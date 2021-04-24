@@ -6,7 +6,6 @@ var port = process.env.PORT || 3004;
 var mongoDB = 'mongodb://host.docker.internal:27017/acopios';
 //var mongoDB = 'mongodb://172.17.0.1:27017/acopios';
 
-
 mongoose.connect(mongoDB, {useFindAndModify: false, useUnifiedTopology: true, useNewUrlParser: true}, (err, res) => {
 	if(err){
 		throw err;
