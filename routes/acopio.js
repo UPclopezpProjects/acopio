@@ -6,6 +6,6 @@ var router = express.Router();
 //var md_auth = require('../middlewares/authenticated');
 
 router.post('/acopiosData', AcopioController.dataTransaction);
-router.post('/getData', AcopioController.getData);
+router.get('/getData', AcopioController.getData);
 
 module.exports = router;

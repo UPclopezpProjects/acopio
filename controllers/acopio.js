@@ -46,17 +46,14 @@ function serviceInit(acopioStored, next) {
 }
 
 function getData(req, res) {
-  var code = req.body.code;
-  console.log(code);
-  var query = { id: code };
-  Acopio.findOne(query, (err, data) => {
+  Acopio.find((err, acopioStored) => {
     if(err){
       res.status(500).send({message: 'Error en la petición'});
     }else{
-      if(!data){
+      if(!acopioStored){
         res.status(200).send({message: null});
       }else{
-        res.status(200).send({message: JSON.stringify(data)});
+        res.status(200).send({message: acopioStored});
       }
     }
   });
