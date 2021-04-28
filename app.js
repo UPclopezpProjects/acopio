@@ -1,6 +1,7 @@
 'use stric'
 //
-global.host = 'host.docker.internal'; //host.docker.internal
+//global.host = 'host.docker.internal'; //host.docker.internal
+global.host = '172.18.1.10'; //host.docker.internal
 global.port = {
   traceability: '3006',
 };
