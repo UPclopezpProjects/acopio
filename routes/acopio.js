@@ -1,11 +1,13 @@
 'use strict'
 
 var express = require('express');
-var AcopioController = require('../controllers/acopio');
 var router = express.Router();
+var AcopioController = require('../controllers/acopio');
 //var md_auth = require('../middlewares/authenticated');
 
 router.post('/acopiosData', AcopioController.dataTransaction);
+router.post('/dataOfCompany', AcopioController.dataOfCompany);
 router.get('/getData', AcopioController.getData);
+router.post('/getCompany', AcopioController.getCompany);
 
 module.exports = router;

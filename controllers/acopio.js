@@ -1,6 +1,7 @@
 'use strict'
 var axios = require('axios');
 var Acopio = require('../models/Acopios');
+var User = require('../models/Users');
 
 function dataTransaction(req, res){
   var acopio = new Acopio();
@@ -9,6 +10,8 @@ function dataTransaction(req, res){
   acopio.name = req.body.name;
   acopio.previousStage = req.body.previousStage;
   acopio.currentStage = req.body.currentStage;
+  acopio.nameOfCompany = req.body.nameOfCompany;
+  acopio.image = req.body.image;
   acopio.save((err, acopioStored) => {
     if(err) {
       console.log(err);
@@ -18,7 +21,7 @@ function dataTransaction(req, res){
         res.status(404).send({ message: 'El dato no ha sido guardado' });
       }else{
         serviceInit(acopioStored, function(data, err) {
-          res.status(200).send({ message: data.message, addData: data.addData });
+          res.status(200).send({ message: data.message, addData: data.addData, info: data.info });
         });
       }
     }
@@ -33,7 +36,8 @@ function serviceInit(acopioStored, next) {
       ubication: acopioStored.ubication,
       name: acopioStored.name,
       previousStage: acopioStored.previousStage,
-      currentStage: acopioStored.currentStage
+      currentStage: acopioStored.currentStage,
+      image: acopioStored.image
     })
     .then(response => {
         //console.log(response.data);
@@ -43,6 +47,37 @@ function serviceInit(acopioStored, next) {
         console.log(error);
         next(null, error);
     });
+}
+
+function dataOfCompany(req, res) {
+  var user = new User();
+  user.email = req.body.email;
+  user.nameOfCompany = req.body.nameOfCompany;
+  user.save((err, userStored) => {
+    if(err) {
+      res.status(500).send({ message: 'Error al guardar los datos para el usuario' });
+    }else{
+      if(!userStored) {
+        res.status(404).send({ message: 'El dato no ha sido guardado para el usuario' });
+      }else{
+        res.status(200).send({ message: true, user: userStored });
+      }
+    }
+  });
+}
+
+function getCompany(req, res) {
+  User.findOne({email: req.body.email}, (err, userStored) => {
+    if(err){
+      res.status(500).send({message: 'Error en la petición'});
+    }else{
+      if(!userStored){
+        res.status(200).send({message: null});
+      }else{
+        res.status(200).send({message: userStored});
+      }
+    }
+  });
 }
 
 function getData(req, res) {
@@ -61,5 +96,7 @@ function getData(req, res) {
 
 module.exports = {
 	dataTransaction,
+  dataOfCompany,
+  getCompany,
   getData
 };
