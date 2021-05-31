@@ -12,6 +12,7 @@ function dataTransaction(req, res){
   acopio.currentStage = req.body.currentStage;
   acopio.nameOfCompany = req.body.nameOfCompany;
   acopio.image = req.body.image;
+  acopio.description = req.body.description;
   acopio.save((err, acopioStored) => {
     if(err) {
       console.log(err);
@@ -37,7 +38,8 @@ function serviceInit(acopioStored, next) {
       name: acopioStored.name,
       previousStage: acopioStored.previousStage,
       currentStage: acopioStored.currentStage,
-      image: acopioStored.image
+      image: acopioStored.image,
+      description: acopioStored.description
     })
     .then(response => {
         //console.log(response.data);
