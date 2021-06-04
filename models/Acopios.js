@@ -8,7 +8,8 @@ var AcopioSchema = new Schema({
   previousStage: {type: String, required: true, max: 100},
   currentStage: {type: String, required: true, max: 100},
   nameOfCompany: {type: String, required: true, max: 100},
-  image: {type: String, required: true, max: 100}
+  image: {type: String, required: true, max: 100},
+  description: {type: String, required: true, max: 100}
 });
 
 module.exports = mongoose.model('Acopio', AcopioSchema);
