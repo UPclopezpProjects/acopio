@@ -15,7 +15,7 @@ function dataTransaction(req, res){
   acopio.description = req.body.description;
   acopio.save((err, acopioStored) => {
     if(err) {
-      console.log(err);
+      //console.log(err);
       res.status(500).send({ message: 'Error al guardar los datos' });
     }else{
       if(!acopioStored) {
