@@ -3,6 +3,7 @@ var Schema = mongoose.Schema;
 
 var AcopioSchema = new Schema({
   fid: {type: String, required: true, max: 100},
+  code: {type: String, required: true, max: 100},
   ubication: {type: String, required: true, max: 100},
   name: {type: String, required: true, max: 100},
   previousStage: {type: String, required: true, max: 100},

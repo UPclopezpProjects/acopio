@@ -6,6 +6,7 @@ var User = require('../models/Users');
 function dataTransaction(req, res){
   var acopio = new Acopio();
   acopio.fid = req.body.fid;
+  acopio.code = req.body.code;
   acopio.ubication = req.body.ubication;
   acopio.name = req.body.name;
   acopio.previousStage = req.body.previousStage;
@@ -34,6 +35,7 @@ function serviceInit(acopioStored, next) {
     axios.post(url, {
       id: acopioStored._id,
       fid: acopioStored.fid,
+      code: acopioStored.code,
       ubication: acopioStored.ubication,
       name: acopioStored.name,
       previousStage: acopioStored.previousStage,
