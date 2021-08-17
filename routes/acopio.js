@@ -9,5 +9,6 @@ router.post('/acopiosData', AcopioController.dataTransaction);
 router.post('/dataOfCompany', AcopioController.dataOfCompany);
 router.get('/getData', AcopioController.getData);
 router.post('/getCompany', AcopioController.getCompany);
+router.get('/getHistory', AcopioController.getHistory);
 
 module.exports = router;

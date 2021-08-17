@@ -98,9 +98,29 @@ function getData(req, res) {
   });
 }
 
+function getHistory(req, res) {
+  var history = [];
+  var query = { nameOfCompany: req.query.nameOfCompany.replace(/[$]+/g, ' ') };
+  Acopio.find(query, (err, dataStored) => {
+    if(err){
+      res.status(500).send({ message: 'Error en la petición' });
+    }else{
+      if(!dataStored){
+        res.status(200).send({ history: null });
+      }else{
+        for(var data of dataStored){
+          history.push(data);
+        }
+        res.status(200).send({ history: history });
+      }
+    }
+  });
+}
+
 module.exports = {
 	dataTransaction,
   dataOfCompany,
   getCompany,
-  getData
+  getData,
+  getHistory
 };
