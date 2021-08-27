@@ -14,6 +14,13 @@ function dataTransaction(req, res){
   acopio.nameOfCompany = req.body.nameOfCompany;
   acopio.image = req.body.image;
   acopio.description = req.body.description;
+  acopio.arrivalDate = req.body.arrivalDate;
+  //acopio.departureDate = req.body.departureDate;
+  acopio.clasification = req.body.clasification;
+  acopio.quantity = req.body.quantity;
+  acopio.measure = req.body.measure;
+  acopio.whoReceives = req.body.whoReceives;
+  //acopio.whoDelivers = req.body.whoDelivers;
   acopio.save((err, acopioStored) => {
     if(err) {
       //console.log(err);
@@ -28,6 +35,38 @@ function dataTransaction(req, res){
       }
     }
   });
+}
+
+function updateTransaction(req, res) {
+  Acopio.findOne({_id: req.body.id}, (err, dataStored) => {
+    if(err){
+      res.status(500).send({ message: 'Error en la petición' });
+    }else{
+      if(!dataStored){
+        res.status(200).send({ message: 'El dato no existe'});
+      }else{
+        var newQuantity = dataStored.quantity - req.body.quantity;
+        //console.log(Math.sign(newQuantity));
+        if (Math.sign(newQuantity) == -1) {
+          //console.log("falseeeeeeeeeeeeeeeeeee");
+          res.status(200).send({ message: false });
+          return;
+        }
+        Acopio.findOneAndUpdate({ _id: dataStored._id }, {quantity: newQuantity}, (err, transactionUpdate) => {
+          if(err){
+            res.status(500).send({ message: 'Error al actualizar los datos' });
+          }else{
+            if(!transactionUpdate){
+              res.status(404).send({ message: 'El dato no existe y no ha sido actualizado' });
+            }else{
+              res.status(200).send({ message: true });
+            }
+          }
+        });
+      }
+    }
+  });
+
 }
 
 function serviceInit(acopioStored, next) {
@@ -119,6 +158,7 @@ function getHistory(req, res) {
 
 module.exports = {
 	dataTransaction,
+  updateTransaction,
   dataOfCompany,
   getCompany,
   getData,

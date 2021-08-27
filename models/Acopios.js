@@ -10,7 +10,14 @@ var AcopioSchema = new Schema({
   currentStage: {type: String, required: true, max: 100},
   nameOfCompany: {type: String, required: true, max: 100},
   image: {type: String, required: true, max: 100},
-  description: {type: String, required: true, max: 100}
+  description: {type: String, required: true, max: 100},
+  arrivalDate: {type: String, required: true, max: 100},
+  //departureDate: {type: String, required: true, max: 100},
+  clasification: {type: String, required: true, max: 100},
+  quantity: {type: String, required: true, max: 100},
+  measure: {type: String, required: true, max: 100},
+  whoReceives: {type: String, required: true, max: 100},
+  //whoDelivers: {type: String, required: true, max: 100}
 });
 
 module.exports = mongoose.model('Acopio', AcopioSchema);
